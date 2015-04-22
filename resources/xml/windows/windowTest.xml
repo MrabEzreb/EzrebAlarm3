@@ -1,0 +1,30 @@
+<EzrebAlarm version="3">
+	<window>
+		<title>TestXMLWindow</title>
+		<undecorated>true</undecorated>
+		<layout>absolute</layout>
+		<translation>
+			<location>305,305</location>
+			<size>310,310</size>
+		</translation>
+		<components>
+			<jcomponent type="label" variable="lblNewLabel">
+				<displayedMnemonic type="char"> </displayedMnemonic>
+				<horizontalAlignment>LEADING</horizontalAlignment>
+				<verticalAlignment>TOP</verticalAlignment>
+				<icon>(null)</icon>
+				<labelFor>(master)</labelFor>
+				<text>Text</text>
+				<toolTipText>tooltip</toolTipText>
+				<enabled>true</enabled>
+				<background>AWT.WHITE</background>
+				<foreground>AWT.BLACK</foreground>
+				<font bold="false" italic="false" size="11">Tahoma</font>
+				<translation>
+					<location>5,5</location>
+					<size>300,300</size>
+				</translation>
+			</jcomponent>
+		</components>
+	</window>
+</EzrebAlarm>
