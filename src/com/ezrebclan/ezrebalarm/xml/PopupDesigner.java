@@ -6,12 +6,19 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import java.awt.Window.Type;
 import java.awt.FlowLayout;
 import java.awt.Dimension;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+
+import org.w3c.dom.Element;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PopupDesigner extends JFrame {
 
@@ -78,6 +85,16 @@ public class PopupDesigner extends JFrame {
 		txtFileName.setColumns(10);
 		
 		btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				PopupAlert pa = new PopupAlert();
+				pa.getLblTitle().setText(txtTitle.getText());
+				pa.getLblMessage().setText(txtMessage.getText());
+				pa.getLblSecondmessage().setText(txtSecondMessage.getText());
+				pa.getBtnClosebutton().setText(txtCloseButtonText.getText());
+				Element e = PopupAlertIO.getXML(pa);
+			}
+		});
 		contentPane.add(btnSave);
 	}
 
