@@ -22,6 +22,10 @@ import javax.swing.border.TitledBorder;
 
 public class AudioConversionProgressDisplay extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -9048388642786707889L;
 	private JPanel contentPane;
 	private JPanel progressPanel;
 	private JButton btnFinish;

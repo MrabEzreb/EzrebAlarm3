@@ -14,10 +14,10 @@ import javax.sound.sampled.AudioInputStream
 import java.io.FileInputStream
 import com.ezrebclan.ezrebalarm.audio.AudioPlayer
 
-object Main extends App {
+object Main {
 
   
-  override def main(args: Array[String]): Unit = {
+  def start(args: Array[String]): Unit = {
 //    var time = new Time(10, 5, 45)
 //    var now = Time.getNow()
 //    var doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()
@@ -33,14 +33,19 @@ object Main extends App {
 //    XMLDOM.writeDOMToFile(doc, file)
 //    val file2 = new File("test2.xml")
 //    time.writeToFile(file2)
-    var ar = new AudioPlayer
-    ar.convertMp3(new File("test.mp3").toURL())
-    var a = new Alarm(new Time(5,5,5)) with SoundAlert with PopupAlert {
-      override def goOff(): Unit = {
-        println("test4")
-        super.goOff
-      }
-    }
-    a.goOff()
+//    var ar = new AudioPlayer
+//    ar.convertMp3(new File("test.mp3").toURL())
+//    var a = new Alarm(new Time(5,5,5)) with SoundAlert with PopupAlert {
+//      override def goOff(): Unit = {
+//        println("test4")
+//        super.goOff
+//      }
+//    }
+//    a.goOff()
+    TaskbarIcon.init()
+  }
+  
+  def stop(): Unit = {
+    TaskbarIcon.exit()
   }
 }

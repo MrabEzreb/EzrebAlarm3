@@ -1,27 +1,26 @@
 package com.ezrebclan.ezrebalarm.xml;
 
-import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-
-import java.awt.Window.Type;
-import java.awt.FlowLayout;
-import java.awt.Dimension;
-
 import javax.swing.JTextField;
-import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 import org.w3c.dom.Element;
 
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-
 public class PopupDesigner extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8312844179089899812L;
 	private JPanel contentPane;
 	private JTextField txtTitle;
 	private JTextField txtMessage;
@@ -29,6 +28,7 @@ public class PopupDesigner extends JFrame {
 	private JTextField txtCloseButtonText;
 	private JButton btnSave;
 	private JTextField txtFileName;
+	private Element e;
 
 	/**
 	 * Launch the application.
@@ -80,7 +80,7 @@ public class PopupDesigner extends JFrame {
 		
 		txtFileName = new JTextField();
 		txtFileName.setHorizontalAlignment(SwingConstants.CENTER);
-		txtFileName.setText("File Name");
+		txtFileName.setText("Name");
 		contentPane.add(txtFileName);
 		txtFileName.setColumns(10);
 		
@@ -93,9 +93,24 @@ public class PopupDesigner extends JFrame {
 				pa.getLblSecondmessage().setText(txtSecondMessage.getText());
 				pa.getBtnClosebutton().setText(txtCloseButtonText.getText());
 				Element e = PopupAlertIO.getXML(pa);
+				PopupDesigner.this.e = e;
 			}
 		});
 		contentPane.add(btnSave);
 	}
+	
+	public Element waitForDone() {
+		while(e == null) {
+			try {
+				Thread.sleep(50);
+			} catch (InterruptedException e1) {
+				e1.printStackTrace();
+			}
+		}
+		return e;
+	}
 
+	public JTextField getTxtFileName() {
+		return txtFileName;
+	}
 }

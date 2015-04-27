@@ -14,7 +14,7 @@ abstract trait XMLExport {
     var fw = new FileWriter(file)
     var doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()
     doc.appendChild(toXML())
-    fw.write(XMLDOM.toString(doc))
+    fw.write(XMLDOM.getString(doc))
     fw.flush()
     fw.close()
   }

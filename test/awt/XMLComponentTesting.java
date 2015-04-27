@@ -1,13 +1,18 @@
 package awt;
 
-import javax.swing.JPanel;
-import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Font;
+
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.SwingConstants;
-import javax.swing.ImageIcon;
 
 public class XMLComponentTesting extends JPanel {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6454418537204021923L;
 
 	/**
 	 * Create the panel.

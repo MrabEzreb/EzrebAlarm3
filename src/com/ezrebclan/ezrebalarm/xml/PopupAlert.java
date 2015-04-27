@@ -1,20 +1,23 @@
 package com.ezrebclan.ezrebalarm.xml;
 
-import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import javax.swing.JLabel;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class PopupAlert extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6054586640815563653L;
 	private JPanel contentPane;
 	private JLabel lblTitle;
 	private JLabel lblSecondmessage;
@@ -42,8 +45,8 @@ public class PopupAlert extends JFrame {
 	 */
 	public PopupAlert() {
 		setSize(new Dimension(300, 300));
-		setVisible(true);
 		setUndecorated(true);
+		setVisible(true);
 		setResizable(false);
 		setTitle("EzrebAlarm3");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -31,12 +31,12 @@ object XMLDOM {
   
   def writeDOMToFile(doc: Document, file: File): Unit = {
     var fw = new FileWriter(file)
-    fw.write(toString(doc))
+    fw.write(getString(doc))
     fw.flush()
     fw.close()
   }
   
-  def toString(doc: Document): String = {
+  def getString(doc: Document): String = {
     var retVal: String = null
     try {
       var sw = new StringWriter
