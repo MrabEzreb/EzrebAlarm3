@@ -15,8 +15,8 @@ object PopupAlertIO {
     var mes2 = dom.getElementsByTagName("lastMessage")
     var close = dom.getElementsByTagName("close")
     alert.getLblTitle.setText(title.item(0).getTextContent)
-    alert.getLblTitle.setText(mes1.item(0).getTextContent)
-    alert.getLblTitle.setText(mes2.item(0).getTextContent)
+    alert.getLblMessage.setText(mes1.item(0).getTextContent)
+    alert.getLblSecondmessage.setText(mes2.item(0).getTextContent)
     alert.getBtnClosebutton.setText(close.item(0).getTextContent)
     alert
   }

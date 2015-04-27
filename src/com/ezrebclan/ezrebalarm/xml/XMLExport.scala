@@ -13,9 +13,12 @@ abstract trait XMLExport {
   def writeToFile(file: File): Unit = {
     var fw = new FileWriter(file)
     var doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()
-    doc.appendChild(toXML())
+    doc.appendChild(doc.createElement("document"));
+    doc.getDocumentElement.appendChild(toXML())
     fw.write(XMLDOM.getString(doc))
     fw.flush()
     fw.close()
   }
+  
+  def getFromXML(element: Element): Unit
 }

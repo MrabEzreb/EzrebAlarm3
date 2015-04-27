@@ -26,12 +26,19 @@ class Time(hours: Int, minutes: Int, seconds: Int) extends BaseData with XMLExpo
   }
   override def toXML(): Element = {
     var parent = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument()
+    parent.appendChild(parent.createElement("document"))
     var time = parent.createElement("time")
     time.setAttribute("hour", hour.toString())
     time.setAttribute("minute", minute.toString())
     time.setAttribute("second", second.toString())
     time.setTextContent(toString())
-    time
+    parent.getDocumentElement.appendChild(time)
+    parent.getDocumentElement
+  }
+  override def getFromXML(element: Element): Unit = {
+    hour = element.getAttribute("hour").toInt
+    minute = element.getAttribute("minute").toInt
+    second = element.getAttribute("second").toInt
   }
   override def toString(): String = {
     hour+":"+minute+":"+second

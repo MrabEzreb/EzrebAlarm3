@@ -15,7 +15,6 @@ import java.io.FileInputStream
 import com.ezrebclan.ezrebalarm.audio.AudioPlayer
 
 object Main {
-
   
   def start(args: Array[String]): Unit = {
 //    var time = new Time(10, 5, 45)

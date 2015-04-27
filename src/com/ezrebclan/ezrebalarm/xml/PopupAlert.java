@@ -3,8 +3,12 @@ package com.ezrebclan.ezrebalarm.xml;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.FlowLayout;
+import java.awt.GraphicsConfiguration;
+import java.awt.GraphicsEnvironment;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+import javafx.scene.canvas.GraphicsContext;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,11 +49,11 @@ public class PopupAlert extends JFrame {
 	 */
 	public PopupAlert() {
 		setSize(new Dimension(300, 300));
+		this.setLocation(GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint().x-150, GraphicsEnvironment.getLocalGraphicsEnvironment().getCenterPoint().y-150);
 		setUndecorated(true);
 		setVisible(true);
 		setResizable(false);
 		setTitle("EzrebAlarm3");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

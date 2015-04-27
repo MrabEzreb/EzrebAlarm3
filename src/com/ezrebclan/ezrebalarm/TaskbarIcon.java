@@ -45,15 +45,15 @@ public class TaskbarIcon {
 		
 		// Create a pop-up menu components
 		Menu menuNew = new Menu("New...");
-		MenuItem newPopupAlert = new MenuItem("...Popup Alert");
+		MenuItem newPopupAlert = new MenuItem("Popup Alert");
 		MenuItem exit = new MenuItem("Exit EzrebAlarm");
 		
 		//Add actionlisteners to components
 		exit.addActionListener(exitListener);
+		newPopupAlert.addActionListener(newPopupAlertListener);
 		
 		//Add components to sub-menus
 		menuNew.add(newPopupAlert);
-		newPopupAlert.addActionListener(newPopupAlertListener);
 		
 		//Add components to pop-up menu
 		popup.add(menuNew);
@@ -94,50 +94,67 @@ public class TaskbarIcon {
 	private static ActionListener exitListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Main.stop();
+			Launcher.stop();
 		}
 	};
 	private static ActionListener newPopupAlertListener = new ActionListener() {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			PopupDesigner pd = new PopupDesigner();
-			Element popup = pd.waitForDone();
-			new File("data/popupWindows").mkdirs();
-			File xml = new File("data/popupWindows/"+pd.getTxtFileName().getText()+".xml");
-			try {
-				xml.createNewFile();
-			} catch (IOException e3) {
-				e3.printStackTrace();
-			}
-			BufferedWriter bw = null;
-			try {
-				bw = new BufferedWriter(new FileWriter(xml));
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
-			Document doc = null;
-			try {
-				doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
-			} catch (ParserConfigurationException e1) {
-				e1.printStackTrace();
-			}
-			doc.appendChild(doc.createElement("document"));
-			doc.getDocumentElement().appendChild(doc.importNode(popup, true));
-			try {
-				bw.write(XMLDOM.getString(doc));
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
-			try {
-				bw.flush();
-			} catch (IOException e2) {
-				e2.printStackTrace();
-			}
-			try {
-				bw.close();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}
+			final PopupDesigner pd = new PopupDesigner();
+			pd.setVisible(true);
+			Thread t2 = new Thread(new Runnable() {
+				
+				@Override
+				public void run() {
+					while(pd.isVisible()) {
+						Thread t = pd.waitForDone();
+						t.start();
+						try {
+							t.join();
+						} catch (InterruptedException e4) {
+							e4.printStackTrace();
+						}
+						Element popup = pd.e;
+						new File("data/popupWindows").mkdirs();
+						File xml = new File("data/popupWindows/"+pd.getTxtFileName().getText()+".xml");
+						try {
+							xml.createNewFile();
+						} catch (IOException e3) {
+							e3.printStackTrace();
+						}
+						BufferedWriter bw = null;
+						try {
+							bw = new BufferedWriter(new FileWriter(xml));
+						} catch (IOException e2) {
+							e2.printStackTrace();
+						}
+						Document doc = null;
+						try {
+							doc = DocumentBuilderFactory.newInstance().newDocumentBuilder().newDocument();
+						} catch (ParserConfigurationException e1) {
+							e1.printStackTrace();
+						}
+						doc.appendChild(doc.createElement("document"));
+						doc.getDocumentElement().appendChild(doc.importNode(popup, true));
+						try {
+							bw.write(XMLDOM.getString(doc));
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+						try {
+							bw.flush();
+						} catch (IOException e2) {
+							e2.printStackTrace();
+						}
+						try {
+							bw.close();
+						} catch (IOException e1) {
+							e1.printStackTrace();
+						}
+					}
+				}
+			});
+			t2.start();
 		}
 	};
 	

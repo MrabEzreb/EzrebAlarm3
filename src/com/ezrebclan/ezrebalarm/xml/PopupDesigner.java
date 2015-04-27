@@ -28,7 +28,7 @@ public class PopupDesigner extends JFrame {
 	private JTextField txtCloseButtonText;
 	private JButton btnSave;
 	private JTextField txtFileName;
-	private Element e;
+	public Element e = null;
 
 	/**
 	 * Launch the application.
@@ -52,7 +52,7 @@ public class PopupDesigner extends JFrame {
 	public PopupDesigner() {
 		setSize(new Dimension(300, 300));
 		setTitle("EzrebAlarm Popup Designer");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -88,26 +88,34 @@ public class PopupDesigner extends JFrame {
 		btnSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PopupAlert pa = new PopupAlert();
+				pa.setVisible(false);
 				pa.getLblTitle().setText(txtTitle.getText());
 				pa.getLblMessage().setText(txtMessage.getText());
 				pa.getLblSecondmessage().setText(txtSecondMessage.getText());
 				pa.getBtnClosebutton().setText(txtCloseButtonText.getText());
 				Element e = PopupAlertIO.getXML(pa);
+				pa.dispose();
 				PopupDesigner.this.e = e;
 			}
 		});
 		contentPane.add(btnSave);
 	}
 	
-	public Element waitForDone() {
-		while(e == null) {
-			try {
-				Thread.sleep(50);
-			} catch (InterruptedException e1) {
-				e1.printStackTrace();
+	public Thread waitForDone() {
+		Thread t = new Thread(new Runnable() {
+			
+			@Override
+			public void run() {
+				while(e == null) {
+					try {
+						Thread.sleep(50);
+					} catch (InterruptedException e1) {
+						e1.printStackTrace();
+					}
+				}
 			}
-		}
-		return e;
+		});
+		return t;
 	}
 
 	public JTextField getTxtFileName() {
