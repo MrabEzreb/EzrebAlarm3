@@ -1,0 +1,8 @@
+<document>
+<popupAlert id="popupAlert">
+<title>Title</title>
+<message>Message</message>
+<lastMessage>Second Message</lastMessage>
+<close>Close Button Text</close>
+</popupAlert>
+</document>
